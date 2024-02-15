@@ -4,5 +4,8 @@ export const time = {
   },
   minutes: (min: number) => {
     return (min * 60) * 1000;
+  },
+  minToSec: (min: number) => {
+    return min * 60;
   }
 }
