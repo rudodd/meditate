@@ -1,7 +1,22 @@
+"use client"
+import { useEffect } from 'react';
 import Image from "next/image";
 import styles from "./page.module.css";
+// @ts-ignore
+import {Howl, Howler} from 'howler';
 
 export default function Home() {
+
+  const sound = new Howl({
+    src: '/sounds/white-noise-long.mp3',
+    preload: true,
+    onload: () => console.log('audio loaded')
+  })
+
+  useEffect(() => {
+    console.log('console here')
+  }, [])
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
