@@ -3,5 +3,4 @@ export interface AudioFile {
   playing: boolean;
   play: () => void;
   stop: () => void;
-  audio: any;
 }

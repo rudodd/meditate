@@ -5,26 +5,30 @@ import { useState, useEffect } from 'react';
 import {Howl, Howler} from 'howler';
 import useWhiteNoise from './hooks/whiteNoise';
 import { AudioFile } from './types';
+import useWarmUp from './hooks/warmUp';
+import { time } from './helpers';
+import useTimer from './hooks/timer';
 
 export default function Home() {
-  const [state, setState] = useState(false)
+  const [isActive, setIsActive] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const timer = useTimer(isActive, isPaused);
   const whiteNoise: AudioFile = useWhiteNoise();
+  const warmUp: AudioFile = useWarmUp();
 
-  useEffect(() => {
-    if (whiteNoise.loaded) {
-      console.log('sound loaded: ', whiteNoise.loaded)
-      setTimeout(() => {
-        setState(true);
-      }, 5000)
-    }
-    console.log(whiteNoise.playing);
-  }, [whiteNoise])
+  const playRoutine = () => {
+    setIsActive(true);
+    whiteNoise.play();
+    setTimeout(() => {
+      warmUp.play();
+    }, time.seconds(3))
+  }
 
   return (
     <main>
       <h1>Meditate</h1>
-      <h6>{state.toString()}</h6>
-      <button onClick={() => whiteNoise.play()}>Play</button>
+      <p>{timer.time}</p>
+      <button onClick={() => playRoutine()}>Play</button>
       <button onClick={() => whiteNoise.stop()}>Stop</button>
     </main>
   );

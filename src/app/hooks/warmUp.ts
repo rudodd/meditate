@@ -1,0 +1,32 @@
+import { useState, useEffect } from 'react';
+
+// @ts-ignore
+import { Howl } from 'howler';
+
+export default function useWarmUp() {
+  const [sound, setSound] = useState<any>()
+  const [loaded, setLoaded] = useState(false);
+  const [playing, setPlaying] = useState(false);
+
+  const play = () => {
+    sound.play();
+  }
+
+  const stop = () => {
+    sound.stop();
+  }
+
+  useEffect(() => {
+    setSound(new Howl({
+      src: '/sounds/stretch-intro.mp3',
+      preload: true,
+      valume: 1,
+      autoplay: false,
+      onload: () => setLoaded(true),
+      onplay: () => setPlaying(true),
+      onstop: () => setPlaying(false),
+    }))
+  }, [])
+
+  return {loaded: loaded, playing: playing, play: play, stop: stop}
+}
