@@ -3,21 +3,23 @@ import { useState, useEffect } from 'react';
 
 // @ts-ignore
 import {Howl, Howler} from 'howler';
-import useWhiteNoise from './hooks/whiteNoise';
+import useWhiteNoise from './hooks/sounds/whiteNoise';
 import { AudioFile, RoutineSettings, Timer } from './types';
-import useWarmUp from './hooks/warmUp';
+import useWarmUp from './hooks/sounds/warmUp';
 import { time } from './helpers';
 import useTimer from './hooks/timer';
 import useMeditationRoutine from './hooks/meditationRoutine';
 
 const defaultRoutine: RoutineSettings = {
-  warmUp: true,
-  warmUpLength: 1.5,
+  warmUp: false,
+  warmUpLength: 1,
   whiteNoise: 'white-noise',
-  length: 10,
+  length: 5,
   guided: 'full',
+  // guided: 'semi',
   secondaryQueue: 'music',
   visualization: 'stillness',
+  // visualization: null,
 }
 
 export default function Home() {

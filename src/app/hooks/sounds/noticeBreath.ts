@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 // @ts-ignore
 import { Howl } from 'howler';
 
-export default function useGetComfortable() {
+export default function useNoticeBreath() {
   const [sound, setSound] = useState<any>()
   const [loaded, setLoaded] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -18,10 +18,11 @@ export default function useGetComfortable() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/comfortable-position.mp3',
+      src: '/sounds/notice-where-your-breath.mp3',
       preload: true,
-      valume: 0.9,
+      volume: 1,
       autoplay: false,
+      rate: 1.1,
       onload: () => setLoaded(true),
       onplay: () => setPlaying(true),
       onstop: () => setPlaying(false),
