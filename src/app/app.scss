@@ -1,0 +1,41 @@
+@import "https://fonts.googleapis.com/css2?family=Borel&display=swap";
+
+// colors
+$blue: #00abc9;
+$red: #d20041;
+$orange: #ff7f00;
+$yellow: #ffb901;
+$purple: #4a2a8b;
+$green: #70a300;
+
+html,
+body {
+  height: 100vh;
+  background: url('/img/endless-knot.jpg') center center no-repeat;
+
+  main {
+
+    .app-bar {
+      background: #323232;
+
+      .app-bar-content {
+        display: flex;
+        align-items: center;
+
+        h1 {
+          text-transform: lowercase;
+          font-family: "Borel", cursive;
+          font-size: 2rem;
+          font-weight: 400;
+          font-style: normal;
+          margin: 1.5rem 0 0;
+          line-height: 1;
+        }
+        
+        .app-bar-avatar {
+          margin-left: auto;
+        }
+      }
+    }
+  }
+}
