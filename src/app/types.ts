@@ -16,6 +16,6 @@ export interface RoutineSettings {
   whiteNoise: null | 'white-noise';
   length: 5 | 7 | 10 | 15 | 30;
   guided: null | 'semi' | 'full';
-  secondaryQueue: null | 'music' | 'wind-chimes';
+  secondaryQueue: null | 'music' | 'singing-bowl';
   visualization: null | 'stillness';
 }
