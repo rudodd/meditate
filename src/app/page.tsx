@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react';
+import { SessionProvider } from "next-auth/react"
 
 // @ts-ignore
 import {Howl, Howler} from 'howler';
@@ -9,6 +10,8 @@ import useWarmUp from './hooks/sounds/warmUp';
 import { time } from './helpers';
 import useTimer from './hooks/timer';
 import useMeditationRoutine from './hooks/meditationRoutine';
+import Login from './components/Login';
+import { Session } from 'next-auth';
 
 const defaultRoutine: RoutineSettings = {
   warmUp: false,
@@ -22,7 +25,12 @@ const defaultRoutine: RoutineSettings = {
   // visualization: null,
 }
 
-export default function Home() {
+interface PageProps {
+  session: Session;
+}
+
+export default function Home(props: PageProps) {
+  const { session } = props;
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const timer: Timer = useTimer(isActive, isPaused);
@@ -38,11 +46,14 @@ export default function Home() {
   }
 
   return (
-    <main>
-      <h1>Meditate</h1>
-      <p>{timer.time}</p>
-      <button onClick={() => playRoutine()}>Play</button>
-      <button onClick={() => stopRoutine()}>Stop</button>
-    </main>
+    <SessionProvider session={session}>
+      <main>
+        <h1>Meditate</h1>
+        <p>{timer.time}</p>
+        <button onClick={() => playRoutine()}>Play</button>
+        <button onClick={() => stopRoutine()}>Stop</button>
+        <Login />
+      </main>
+    </SessionProvider>
   );
 }
