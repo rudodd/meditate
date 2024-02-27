@@ -10,6 +10,15 @@ import { Timer, SessionStatus } from '../types';
 
 // import components
 import Header from './Header';
+import Footer from './Footer';
+import LinearProgress from '@mui/material/LinearProgress';
+import CircularProgress from '@mui/material/CircularProgress';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import LoginIcon from '@mui/icons-material/Login';
+import Typography from '@mui/material/Typography';
+import { IconButton } from '@mui/material';
+import TuneIcon from '@mui/icons-material/Tune';
 
 export default function App() {
   const { data, status } = useSession();
@@ -24,35 +33,72 @@ export default function App() {
     setIsActive(true);
   }
 
-  const stopRoutine = () => {
+  const toggleRoutinePause = () => {
+    setIsPaused(!isPaused)
+  }
 
+  const stopRoutine = () => {
+    setIsActive(false);
+    timer.reset();
   }
 
   useEffect(() => {
-    const loadingTimeout = setTimeout(() => {
-      setLoading(false)
-    }, 2000)
+    let loadingTimeout: ReturnType<typeof setTimeout>;
+    if (routine.loadingProgress === 100 && status !== SessionStatus.Loading) {
+      loadingTimeout = setTimeout(() => {
+        setLoading(false);
+      }, 500)
+    }
+    if (routine.playProgress > 100) {
+      stopRoutine();
+    }
 
     return () => clearTimeout(loadingTimeout);
-  }, [])
-
-  useEffect(() => {
-    console.log(data)
-  }, [data])
+  }, [routine, status])
 
   return (
     <main>
       <Header user={data?.user} />
-      {loading || status === SessionStatus.Loading ? (
-        <h2>Loading.</h2>
+      {loading ? (
+        <div className="loading-container blur">
+          <LinearProgress variant="determinate" color="error" value={routine.loadingProgress} />
+          <div className="circle-container">
+            <CircularProgress className="circle" />
+          </div>
+          
+        </div>
       ) : status === SessionStatus.LoggedOut ? (
-        <button onClick={() => signIn('google')}>sign in with gooogle</button>
+        <Container className="content-container blur">
+          <Button 
+            variant="contained" 
+            size="large"
+            startIcon={<LoginIcon />}
+            onClick={() => signIn('google')} 
+          >
+            Login with Google
+          </Button>
+        </Container>
       ) : (
         <>
-          <button onClick={() => signOut()}>sign out</button>
-          <p>{timer.time}</p>
-          <button onClick={() => playRoutine()}>Play</button>
-          <button onClick={() => stopRoutine()}>Stop</button>
+          <Container className="content-container">
+            <div className="content">
+              <div className="timer">
+                {~~(timer.time / 60) < 10 ? '0' + ~~(timer.time / 60) : ~~(timer.time / 60)}
+                :
+                {timer.time % 60 < 10 ? '0' + timer.time % 60 : timer.time % 60}
+              </div>
+              <div className="progress-bar">
+                <LinearProgress variant="determinate" value={routine.playProgress} className="progress-visual" />
+                <Typography variant="body2" color="text.secondary" className="progress-text">{`${Math.round(routine.playProgress)}%`}</Typography>
+              </div>
+              <div className="settings">
+                <IconButton disabled={isActive} className="settings-button" size="large">
+                  <TuneIcon />
+                </IconButton>
+              </div>
+            </div>
+          </Container>
+          <Footer isActive={isActive} isPaused={isPaused} play={playRoutine} pause={toggleRoutinePause} />
         </>
       )}
     </main>

@@ -13,7 +13,7 @@ export default function useSettings(data: Session | null, status: string) {
           setSettings(res?.data?.user?.settings);
         })
     }
-  }, [status])
+  }, [data, status])
 
   return settings
 }

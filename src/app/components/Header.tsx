@@ -13,6 +13,10 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function Header(props: GoogleUser) {
   const { user } = props;
@@ -27,7 +31,7 @@ export default function Header(props: GoogleUser) {
   };
 
   return (
-    <AppBar position="static" className="app-bar">
+    <AppBar position="fixed" className="app-bar">
       <Container className="app-bar-content">
         <h1>Meditate</h1>
         <div className="app-bar-avatar">
@@ -53,10 +57,16 @@ export default function Header(props: GoogleUser) {
                 onClose={closeMenu}
               >
                 <MenuItem onClick={() =>console.log('open settings')}>
-                  Settings
+                  <ListItemIcon>
+                    <SettingsIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText>Settings</ListItemText>
                 </MenuItem>
                 <MenuItem onClick={() => signOut()}>
-                  Logout
+                  <ListItemIcon>
+                    <LogoutIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText>Logout</ListItemText>
                 </MenuItem>
               </Menu>
             </>
