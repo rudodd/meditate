@@ -7,17 +7,19 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Fab from '@mui/material/Fab';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import StopIcon from '@mui/icons-material/Stop';
 import PauseIcon from '@mui/icons-material/Pause';
 
 interface FooterProps {
   isActive: boolean;
   isPaused: boolean;
   play: () => void;
+  stop: () => void;
   pause: () => void;
 }
 
 export default function Footer(props: FooterProps) {
-  const { isActive, isPaused, play, pause } = props;
+  const { isActive, isPaused, play, stop, pause } = props;
 
   const StyledFab = styled(Fab)({
     position: 'absolute',
@@ -39,10 +41,11 @@ export default function Footer(props: FooterProps) {
       <StyledFab 
         color="secondary" 
         aria-label="add" 
-        className={`state-button ${isActive ? 'pause' : 'play'}`}
+        className={`state-button ${isActive ? 'stop' : 'play'}`}
       >
         {isActive ? (
-          <PauseIcon />
+          // <PauseIcon onClick={() => pause()} />
+          <StopIcon onClick={() => stop()} />
         ) : (
           <PlayArrowIcon onClick={() => play()} />
         )}

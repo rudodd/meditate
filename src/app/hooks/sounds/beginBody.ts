@@ -16,6 +16,10 @@ export default function useBeginBody() {
     sound.stop();
   }
 
+  const pause = () => {
+    sound.pause();
+  }
+
   useEffect(() => {
     setSound(new Howl({
       src: '/sounds/lets-begin.mp3',
@@ -29,5 +33,5 @@ export default function useBeginBody() {
     }))
   }, [])
 
-  return {loaded: loaded, playing: playing, play: play, stop: stop}
+  return {loaded: loaded, playing: playing, play: play, stop: stop, pause: pause, audio: sound}
 }

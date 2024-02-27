@@ -16,6 +16,10 @@ export default function useWarmUp() {
     sound.stop();
   }
 
+  const pause = () => {
+    sound.pause();
+  }
+
   useEffect(() => {
     setSound(new Howl({
       src: '/sounds/stretch-intro.mp3',
@@ -29,5 +33,5 @@ export default function useWarmUp() {
     }))
   }, [])
 
-  return {loaded: loaded, playing: playing, play: play, stop: stop}
+  return {loaded: loaded, playing: playing, play: play, stop: stop, pause: pause, audio: sound}
 }

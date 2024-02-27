@@ -16,6 +16,10 @@ export default function useLetGo() {
     sound.stop();
   }
 
+  const pause = () => {
+    sound.pause();
+  }
+
   useEffect(() => {
     setSound(new Howl({
       src: '/sounds/let-focus-go.mp3',
@@ -29,5 +33,5 @@ export default function useLetGo() {
     }))
   }, [])
 
-  return {loaded: loaded, playing: playing, play: play, stop: stop}
+  return {loaded: loaded, playing: playing, play: play, stop: stop, pause: pause, audio: sound}
 }

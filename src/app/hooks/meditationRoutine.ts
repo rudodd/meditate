@@ -65,7 +65,6 @@ export default function useMeditationRoutine(props: RoutineProps) {
   const stillnessTwo: AudioFile = useStillnessTwo();
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [playProgress, setPlayProgress] = useState(0);
-  const [pausedSounds, setPausedSounds] = useState<AudioFile[]>([]);
   const soundDependencies = [
     whiteNoise,
     warmUp,
@@ -112,36 +111,24 @@ export default function useMeditationRoutine(props: RoutineProps) {
     }
   }
 
-  const triggerChimes = (num: number, interval: number = 0) => {
-    const chimeInterval = time.seconds(interval);
-    chime.play();
-    if (num === 2 || num === 3) {
-      setTimeout(() => chime.play(), chimeInterval);
-    }
-    if (num === 3) {
-      setTimeout(() => chime.play(), (chimeInterval * 2));
-    }
+  const stop = () => {
+    Howler.stop();
   }
 
   useEffect(() => {
-    const numOfSounds = soundDependencies.length;
-    const loadedSounds = [];
-    soundDependencies.forEach((sound) => {
-      if (sound.loaded) {
-        loadedSounds.push(sound)
-      }
-    })
-    const numLoadedSounds = loadedSounds.length;
-    const progress = (numLoadedSounds / numOfSounds) * 100;
-    setLoadingProgress(progress);
+    if (loadingProgress < 100) {
+      const numOfSounds = soundDependencies.length;
+      const loadedSounds = [];
+      soundDependencies.forEach((sound) => {
+        if (sound.loaded) {
+          loadedSounds.push(sound)
+        }
+      })
+      const numLoadedSounds = loadedSounds.length;
+      const progress = (numLoadedSounds / numOfSounds) * 100;
+      setLoadingProgress(progress);
+    }
   }, [...soundDependencies]);
-
-  // useEffect(() => {
-  //   console.log('settings: ', settings);
-  //   console.log('isActive: ', isActive);
-  //   console.log('isPaused: ', isPaused);
-  //   console.log('timer: ', timer);
-  // }, [settings, isActive, isPaused, timer])
 
   useEffect(() => {
     if (settings) {
@@ -154,32 +141,25 @@ export default function useMeditationRoutine(props: RoutineProps) {
       const windDownChimeTime = finalChimeTime - time.minToSec(1.5);
       const totalLength = finalChimeTime + 21;
       setPlayProgress((timer.time / totalLength) * 100)
-
-      // if (isActive && isPaused) {
-      //   soundDependencies.forEach((sound) => {
-      //     if (sound.playing) {
-      //       sound.pause();
-      //       setPausedSounds([...pausedSounds, sound]);
-      //     }
-      //   })
-      // }
   
       if (isActive && !isPaused) {
   
         // chime triggers
         // - three chimes to begin and to end
-        if (timer.time === beginTime || timer.time === finalChimeTime) {
-          triggerChimes(3, 7);
-        }
+        trigger(true, chime, beginTime);
+        trigger(true, chime, beginTime + 7);
+        trigger(true, chime, beginTime + 14);
+        trigger(true, chime, finalChimeTime);
+        trigger(true, chime, finalChimeTime + 7);
+        trigger(true, chime, finalChimeTime + 14);
   
         // - two chimes to signal the wind down
-        if (timer.time === windDownChimeTime) {
-          triggerChimes(2, 7);
-        }
+        trigger(true, chime, windDownChimeTime);
+        trigger(true, chime, windDownChimeTime + 7);
   
         // - one chime at half way through mindfullness section
-        if (settings.length > 5 && timer.time === halfWayTime) {
-          triggerChimes(1);
+        if (settings.length > 5) {
+          trigger(true, chime, halfWayTime);
         }
   
         // white noise triggers
@@ -243,7 +223,11 @@ export default function useMeditationRoutine(props: RoutineProps) {
         }
       }
     }
-  }, [isActive, isPaused, timer])
+  }, [timer])
 
-  return {loadingProgress: loadingProgress, playProgress: playProgress}
+  useEffect(() => {
+    // Howler.pause();
+  }, [isPaused])
+
+  return {loadingProgress: loadingProgress, playProgress: playProgress, stop: stop}
 }

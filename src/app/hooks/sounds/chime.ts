@@ -16,6 +16,10 @@ export default function useChime() {
     sound.stop();
   }
 
+  const pause = () => {
+    sound.pause();
+  }
+
   useEffect(() => {
     setSound(new Howl({
       src: '/sounds/chime.mp3',
@@ -28,5 +32,5 @@ export default function useChime() {
     }))
   }, [])
 
-  return {loaded: loaded, playing: playing, play: play, stop: stop}
+  return {loaded: loaded, playing: playing, play: play, stop: stop, pause: pause, audio: sound}
 }

@@ -30,7 +30,11 @@ export default function App() {
   const routine = useMeditationRoutine({settings, isActive, isPaused, timer});
 
   const playRoutine = () => {
-    setIsActive(true);
+    if (routine.loadingProgress === 100) {
+      setIsActive(true);
+    } else {
+      setIsActive(true);
+    }
   }
 
   const toggleRoutinePause = () => {
@@ -40,6 +44,7 @@ export default function App() {
   const stopRoutine = () => {
     setIsActive(false);
     timer.reset();
+    routine.stop();
   }
 
   useEffect(() => {
@@ -98,7 +103,7 @@ export default function App() {
               </div>
             </div>
           </Container>
-          <Footer isActive={isActive} isPaused={isPaused} play={playRoutine} pause={toggleRoutinePause} />
+          <Footer isActive={isActive} isPaused={isPaused} play={playRoutine} stop={stopRoutine} pause={toggleRoutinePause} />
         </>
       )}
     </main>

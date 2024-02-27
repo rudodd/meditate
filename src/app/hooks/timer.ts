@@ -5,7 +5,7 @@ export default function useTimer(isActive: boolean, isPaused: boolean) {
   const [timer, setTimer] = useState<number>(0);
 
   const timerReset = () => {
-      setTimer(0);
+    setTimer(0);
   };
 
   useEffect(() => {

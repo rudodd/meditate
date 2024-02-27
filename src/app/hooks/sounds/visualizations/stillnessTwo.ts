@@ -19,6 +19,10 @@ export default function useStillnessTwo() {
     }, 5000)
   }
 
+  const pause = () => {
+    sound.pause();
+  }
+
   useEffect(() => {
     setSound(new Howl({
       src: '/sounds/your-mind-is-lake.mp3',
@@ -31,5 +35,5 @@ export default function useStillnessTwo() {
     }))
   }, [])
 
-  return {loaded: loaded, playing: playing, play: play, stop: stop}
+  return {loaded: loaded, playing: playing, play: play, stop: stop, pause: pause, audio: sound}
 }

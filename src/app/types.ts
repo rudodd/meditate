@@ -3,6 +3,8 @@ export interface AudioFile {
   playing: boolean;
   play: () => void;
   stop: () => void;
+  pause: () => void;
+  audio: any;
 }
 
 export interface Timer {

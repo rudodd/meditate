@@ -126,6 +126,10 @@ body {
         &.pause {
           background: $orange;
         }
+
+        &.stop {
+          background: $red;
+        }
       }
     }
   }

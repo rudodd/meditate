@@ -20,6 +20,10 @@ export default function useWhiteNoise() {
     }, 10000)
   }
 
+  const pause = () => {
+    sound.pause();
+  }
+
   useEffect(() => {
     setSound(new Howl({
       src: '/sounds/white-noise-long.mp3',
@@ -33,5 +37,5 @@ export default function useWhiteNoise() {
     }))
   }, [])
 
-  return {loaded: loaded, playing: playing, play: play, stop: stop, audio: sound}
+  return {loaded: loaded, playing: playing, play: play, stop: stop, pause: pause, audio: sound}
 }
