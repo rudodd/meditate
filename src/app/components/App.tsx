@@ -1,16 +1,18 @@
 // import library functionality
 import { useEffect, useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import axios, {AxiosResponse} from 'axios';
 
 // import custom functionality
 import useTimer from '../hooks/timer';
 import useMeditationRoutine from '../hooks/meditationRoutine';
 import useSettings from '../hooks/useSettings';
-import { Timer, SessionStatus } from '../types';
+import { Timer, SessionStatus, RoutineSettings } from '../types';
 
 // import components
 import Header from './Header';
 import Footer from './Footer';
+import Settings from './Settings';
 import LinearProgress from '@mui/material/LinearProgress';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
@@ -21,12 +23,13 @@ import { IconButton } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 
 export default function App() {
-  const { data, status } = useSession();
+  const { data: user, status } = useSession();
   const [loading, setLoading] = useState<boolean>(true);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const timer: Timer = useTimer(isActive, isPaused);
-  const settings = useSettings(data, status);
+  const { id, settings, fetchSettings } = useSettings(user, status);
   const routine = useMeditationRoutine({settings, isActive, isPaused, timer});
 
   const playRoutine = () => {
@@ -47,6 +50,17 @@ export default function App() {
     routine.stop();
   }
 
+  const saveSettings = (newSettings: RoutineSettings) => {
+    const userObj = {
+      email: user?.user?.email,
+      settings: newSettings
+    }
+    axios.put('/api/user', { id: id, user: userObj })
+    .then((res: AxiosResponse) => {
+      fetchSettings();
+    })
+  }
+
   useEffect(() => {
     let loadingTimeout: ReturnType<typeof setTimeout>;
     if (routine.loadingProgress === 100 && status !== SessionStatus.Loading) {
@@ -63,7 +77,7 @@ export default function App() {
 
   return (
     <main>
-      <Header user={data?.user} />
+      <Header user={user?.user} />
       {loading ? (
         <div className="loading-container blur">
           <LinearProgress variant="determinate" color="error" value={routine.loadingProgress} />
@@ -97,7 +111,12 @@ export default function App() {
                 <Typography variant="body2" color="text.secondary" className="progress-text">{`${Math.round(routine.playProgress)}%`}</Typography>
               </div>
               <div className="settings">
-                <IconButton disabled={isActive} className="settings-button" size="large">
+                <IconButton 
+                  disabled={isActive} 
+                  className="settings-button" 
+                  size="large"
+                  onClick={() => setSettingsOpen(true)}
+                >
                   <TuneIcon />
                 </IconButton>
               </div>
@@ -106,6 +125,7 @@ export default function App() {
           <Footer isActive={isActive} isPaused={isPaused} play={playRoutine} stop={stopRoutine} pause={toggleRoutinePause} />
         </>
       )}
+      <Settings open={settingsOpen} settings={settings} close={() => setSettingsOpen(false)} save={saveSettings} />
     </main>
   )
 }

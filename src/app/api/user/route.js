@@ -1,4 +1,5 @@
 import clientPromise from '../../../lib/mongodb';
+import { ObjectId } from "mongodb";
 
 const defaultRoutine = {
   warmUp: false,
@@ -23,4 +24,21 @@ export async function POST(req) {
     const post = await db.collection('user').insertOne({ email: email, settings: defaultRoutine });
     return Response.json({ status: 200, user: post });
   }
+
+  // await db.collection('user').deleteMany({});
+  // return Response.json({ status: 200});
+}
+
+export async function PUT(req) {
+  const { id, user } = await req.json();
+  const client = await clientPromise;
+  const db = client.db('meditate');
+  const put = await db.collection('user').updateOne(
+    {_id: new ObjectId(id)},
+    {
+      $set: {...user},
+      $currentDate: { lastModified: true }
+    }
+  );
+  return Response.json({ status: 200, dbResponse: put })
 }

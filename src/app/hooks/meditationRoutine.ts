@@ -172,8 +172,10 @@ export default function useMeditationRoutine(props: RoutineProps) {
         if (settings.warmUp) {
   
           // singing bowl triggers
-          trigger(true, singingBowl, 2);
-          trigger(false, singingBowl, time.minToSec(settings.warmUpLength) - 5)
+          if (settings.secondaryQueue === 'singing-bowl') {
+            trigger(true, singingBowl, 2);
+            trigger(false, singingBowl, time.minToSec(settings.warmUpLength) - 5)
+          }
           
           // warm up guides
           if (beginTime > 30) { trigger(true, warmUp, 5, ['full']) };
@@ -211,8 +213,10 @@ export default function useMeditationRoutine(props: RoutineProps) {
         if (settings.visualization !== null) {
 
           // singing bowl triggers
-          trigger(true, singingBowl, (visualizationTime - 10));
-          trigger(false, singingBowl, (visualizationTime + 85));
+          if (settings.secondaryQueue === 'singing-bowl') {
+            trigger(true, singingBowl, (visualizationTime - 10));
+            trigger(false, singingBowl, (visualizationTime + 85));
+          }
 
           // stillness visualization triggers
           if (settings.visualization === 'stillness') {

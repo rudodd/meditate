@@ -4,16 +4,24 @@ import { RoutineSettings } from '../types';
 import { Session } from 'next-auth';
 
 export default function useSettings(data: Session | null, status: string) {
+  const [id, setId] = useState<string | null>(null);
   const [settings, setSettings] = useState<RoutineSettings>();
 
-  useEffect(() => {
-    if (status === 'authenticated') {
+  const fetchSettings = () => {
+    if (status === 'authenticated' && data?.user?.email) {
+      console.log('get settings');
       axios.post('/api/user', {email: data?.user?.email})
         .then((res: AxiosResponse) => {
           setSettings(res?.data?.user?.settings);
+          setId(res?.data?.user?._id);
         })
     }
+  }
+
+  useEffect(() => {
+    fetchSettings();
   }, [data, status])
 
-  return settings
+  const userInfo = {id, settings, fetchSettings};
+  return userInfo;
 }

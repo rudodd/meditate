@@ -133,4 +133,44 @@ body {
       }
     }
   }
+
+  .settings-container {
+    background: $dark-grey;
+    color: white;
+    border-radius: 10px;
+    margin: 2rem 2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem 0;
+
+    h3 {
+      margin: 0;
+    }
+
+    .settings-input-group {
+      display: flex;
+      flex-direction: column;
+
+      h4 {
+        margin: 0;
+      }
+
+      .settings-input {
+
+        &.select {
+          margin: 1.5rem 0 0.5rem;
+        }
+      
+        * {
+          color: white;
+          border-color: white;
+        }
+  
+        .MuiSwitch-track {
+          border: solid 1px white;
+        }
+      }
+    }
+  }
 }
