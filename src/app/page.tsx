@@ -1,11 +1,10 @@
 "use client"
 import { SessionProvider } from "next-auth/react"
-import { Session } from 'next-auth';
 import App from './components/App';
 import CssBaseline from '@mui/material/CssBaseline';
 
-
-export default function Home(session: Session) {
+// using any because the next auth Session type is throwing typescript errors during build on Vercel
+export default function Home(session: any) {
 
   return (
     <SessionProvider session={session}>

@@ -13,6 +13,7 @@ export interface Timer {
 }
 
 export interface GoogleUser {
+  expires?: string;
   user: {
     name?: string | null | undefined;
     email?: string | null | undefined;
