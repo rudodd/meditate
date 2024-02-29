@@ -22,7 +22,7 @@ export default function useBeginBreath() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/begin-breath.webm',
+      src: '/sounds/begin-breath.mp3',
       preload: true,
       volume: 1,
       autoplay: false,

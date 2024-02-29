@@ -25,7 +25,7 @@ export default function useStillnessOne() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/lake-visualization.webm',
+      src: '/sounds/lake-visualization.mp3',
       preload: true,
       volume: 0.9,
       autoplay: false,

@@ -22,7 +22,7 @@ export default function useChime() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/chime.webm',
+      src: '/sounds/chime.mp3',
       preload: true,
       volume: 0.65,
       autoplay: false,

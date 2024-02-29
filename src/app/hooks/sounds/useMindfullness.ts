@@ -22,7 +22,7 @@ export default function useMindfullness() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/wandering-mind.webm',
+      src: '/sounds/wandering-mind.mp3',
       preload: true,
       volume: 1,
       autoplay: false,

@@ -22,7 +22,7 @@ export default function useLastBreath() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/last-deep-breath.webm',
+      src: '/sounds/last-deep-breath.mp3',
       preload: true,
       volume: 1,
       rate: 1.1,

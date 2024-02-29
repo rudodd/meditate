@@ -22,7 +22,7 @@ export default function useWarmUp() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/stretch-intro.webm',
+      src: '/sounds/stretch-intro.mp3',
       preload: true,
       volume: 1,
       rate: 1.1,

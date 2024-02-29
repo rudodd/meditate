@@ -22,7 +22,7 @@ export default function useMantra() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/earth-trust.webm',
+      src: '/sounds/earth-trust.mp3',
       preload: true,
       volume: 0.75,
       autoplay: false,

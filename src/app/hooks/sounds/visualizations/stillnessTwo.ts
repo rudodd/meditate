@@ -25,7 +25,7 @@ export default function useStillnessTwo() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/your-mind-is-lake.webm',
+      src: '/sounds/your-mind-is-lake.mp3',
       preload: true,
       volume: 0.9,
       autoplay: false,

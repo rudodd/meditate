@@ -22,7 +22,7 @@ export default function useEnd() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/open-your-eyes.webm',
+      src: '/sounds/open-your-eyes.mp3',
       preload: true,
       volume: 1,
       autoplay: false,

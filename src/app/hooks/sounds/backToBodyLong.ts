@@ -22,7 +22,7 @@ export default function useBackToBodyLong() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/back-to-body-long.webm',
+      src: '/sounds/back-to-body-long.mp3',
       preload: true,
       volume: 1,
       autoplay: false,

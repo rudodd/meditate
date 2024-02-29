@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { RoutineSettings } from '../types';
+import { RoutineSettings, SessionStatus } from '../types';
 import { GoogleUser } from '../types';
 
 export default function useSettings(data: GoogleUser | null, status: string) {
@@ -8,7 +8,7 @@ export default function useSettings(data: GoogleUser | null, status: string) {
   const [settings, setSettings] = useState<RoutineSettings>();
 
   const fetchSettings = () => {
-    if (status === 'authenticated' && data?.user?.email) {
+    if (status === SessionStatus.LoggedIn && data?.user?.email) {
       console.log('get settings');
       axios.post('/api/user', {email: data?.user?.email})
         .then((res: AxiosResponse) => {

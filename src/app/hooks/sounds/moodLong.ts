@@ -22,7 +22,7 @@ export default function useMoodLong() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/mood-long.webm',
+      src: '/sounds/mood-long.mp3',
       preload: true,
       volume: 1,
       autoplay: false,

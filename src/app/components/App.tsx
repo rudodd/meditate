@@ -1,7 +1,7 @@
 // import library functionality
 import { useEffect, useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
-import axios, {AxiosResponse} from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 // import custom functionality
 import useTimer from '../hooks/timer';
@@ -25,6 +25,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 export default function App() {
   const { data: user, status } = useSession();
   const [loading, setLoading] = useState<boolean>(true);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
@@ -73,7 +74,14 @@ export default function App() {
     }
 
     return () => clearTimeout(loadingTimeout);
-  }, [routine, status])
+  }, [routine]);
+
+  useEffect(() => {
+    console.log(status, user);
+    if (user?.user?.email) {
+      setLoggedIn(true);
+    }
+  }, [user])
 
   return (
     <main>
@@ -84,9 +92,8 @@ export default function App() {
           <div className="circle-container">
             <CircularProgress className="circle" />
           </div>
-          
         </div>
-      ) : status === SessionStatus.LoggedOut ? (
+      ) : !loggedIn ? (
         <Container className="content-container blur">
           <Button 
             variant="contained" 

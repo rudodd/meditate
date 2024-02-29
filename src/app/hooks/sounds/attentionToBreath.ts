@@ -22,7 +22,7 @@ export default function useAttentionToBreath() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/turn-attention-to-breath.webm',
+      src: '/sounds/turn-attention-to-breath.mp3',
       preload: true,
       volume: 1,
       rate: 1.1,
