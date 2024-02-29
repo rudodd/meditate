@@ -26,7 +26,7 @@ export default function useWhiteNoise() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/white-noise-long.mp3',
+      src: '/sounds/white-noise-long.webm',
       preload: true,
       volume: 1,
       autoplay: false,

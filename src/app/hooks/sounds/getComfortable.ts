@@ -22,7 +22,7 @@ export default function useGetComfortable() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/comfortable-position.mp3',
+      src: '/sounds/comfortable-position.webm',
       preload: true,
       volume: 0.9,
       rate: 1.1,

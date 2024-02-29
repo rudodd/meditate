@@ -22,7 +22,7 @@ export default function useBodyScanShort() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/body-scan-short.mp3',
+      src: '/sounds/body-scan-short.webm',
       preload: true,
       volume: 1,
       autoplay: false,

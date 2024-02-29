@@ -22,7 +22,7 @@ export default function useLetGo() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/let-focus-go.mp3',
+      src: '/sounds/let-focus-go.webm',
       preload: true,
       volume: 1,
       autoplay: false,

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Howl } from 'howler';
 
 export default function useWarmUp() {
-  const [sound, setSound] = useState<any>()
+  const [sound, setSound] = useState<any>(null)
   const [loaded, setLoaded] = useState(false);
   const [playing, setPlaying] = useState(false);
 
@@ -22,7 +22,7 @@ export default function useWarmUp() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/stretch-intro.mp3',
+      src: '/sounds/stretch-intro.webm',
       preload: true,
       volume: 1,
       rate: 1.1,

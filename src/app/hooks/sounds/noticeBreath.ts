@@ -22,7 +22,7 @@ export default function useNoticeBreath() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/notice-where-your-breath.mp3',
+      src: '/sounds/notice-where-your-breath.webm',
       preload: true,
       volume: 1,
       autoplay: false,

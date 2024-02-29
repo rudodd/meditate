@@ -25,7 +25,7 @@ export default function useSingingBowl() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/singing-bowl.mp3',
+      src: '/sounds/singing-bowl.webm',
       preload: true,
       volume: 1,
       autoplay: false,

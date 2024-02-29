@@ -22,7 +22,7 @@ export default function useBeginBody() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/lets-begin.mp3',
+      src: '/sounds/lets-begin.webm',
       preload: true,
       volume: 1,
       autoplay: false,
