@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { RoutineSettings } from '../types';
-import { Session } from 'next-auth';
+import { GoogleUser } from '../types';
 
-export default function useSettings(data: Session | null, status: string) {
+export default function useSettings(data: GoogleUser | null, status: string) {
   const [id, setId] = useState<string | null>(null);
   const [settings, setSettings] = useState<RoutineSettings>();
 
