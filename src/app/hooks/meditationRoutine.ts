@@ -109,22 +109,20 @@ export default function useMeditationRoutine(props: RoutineProps) {
   }, [isActive, isPaused]);
 
   const trigger = (play: boolean, sound: AudioFile, time: number = 0, guideLevel: string[] = []) => {
-    if (!sound.playing) {
-      if (timer === time) {
-        if (guideLevel.length) {
-          if (settings?.guided && guideLevel.includes(settings?.guided)) {
-            if (play) {
-              sound.play();
-            } else {
-              sound.stop();
-            }
-          }
-        } else {
+    if (timer === time) {
+      if (guideLevel.length) {
+        if (settings?.guided && guideLevel.includes(settings?.guided)) {
           if (play) {
             sound.play();
           } else {
             sound.stop();
           }
+        }
+      } else {
+        if (play) {
+          sound.play();
+        } else {
+          sound.stop();
         }
       }
     }

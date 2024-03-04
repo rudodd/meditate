@@ -24,7 +24,7 @@ export default function useLastBreath() {
     setSound(new Howl({
       src: '/sounds/last-deep-breath.mp3',
       preload: true,
-      volume: 1,
+      volume: 0.8,
       rate: 1.1,
       autoplay: false,
       onload: () => setLoaded(true),

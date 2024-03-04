@@ -24,7 +24,7 @@ export default function useBackToBodyLong() {
     setSound(new Howl({
       src: '/sounds/back-to-body-long.mp3',
       preload: true,
-      volume: 1,
+      volume: 0.85,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

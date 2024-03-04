@@ -24,7 +24,7 @@ export default function useMantra() {
     setSound(new Howl({
       src: '/sounds/earth-trust.mp3',
       preload: true,
-      volume: 0.75,
+      volume: 0.7,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),
