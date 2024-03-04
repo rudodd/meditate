@@ -24,7 +24,7 @@ export default function useLetGo() {
     setSound(new Howl({
       src: '/sounds/let-focus-go.mp3',
       preload: true,
-      volume: 1,
+      volume: 0.7,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

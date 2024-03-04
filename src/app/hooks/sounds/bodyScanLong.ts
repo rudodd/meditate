@@ -24,7 +24,7 @@ export default function useBodyScanLong() {
     setSound(new Howl({
       src: '/sounds/body-scan-long.mp3',
       preload: true,
-      volume: 1,
+      volume: 0.7,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

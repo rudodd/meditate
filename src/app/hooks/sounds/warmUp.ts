@@ -24,7 +24,7 @@ export default function useWarmUp() {
     setSound(new Howl({
       src: '/sounds/stretch-intro.mp3',
       preload: true,
-      volume: 1,
+      volume: 0.85,
       rate: 1.1,
       autoplay: false,
       onload: () => setLoaded(true),

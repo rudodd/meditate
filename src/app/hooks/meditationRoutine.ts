@@ -29,6 +29,7 @@ import useEnd from './sounds/end';
 import useSingingBowl from './sounds/singingBowl';
 import useStillnessOne from './sounds/visualizations/stillnessOne';
 import useStillnessTwo from './sounds/visualizations/stillnessTwo';
+import useMusic from './sounds/music';
 
 interface RoutineProps {
   settings: RoutineSettings | undefined;
@@ -62,6 +63,7 @@ export default function useMeditationRoutine(props: RoutineProps) {
   const singingBowl: AudioFile = useSingingBowl();
   const stillnessOne: AudioFile = useStillnessOne();
   const stillnessTwo: AudioFile = useStillnessTwo();
+  const music: AudioFile = useMusic();
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [playProgress, setPlayProgress] = useState(0);
   const [timer, setTimer] = useState<number>(0);
@@ -188,10 +190,15 @@ export default function useMeditationRoutine(props: RoutineProps) {
         // warm up triggers
         if (settings.warmUp) {
   
-          // singing bowl triggers
+          // secondary queues triggers
           if (settings.secondaryQueue === 'singing-bowl') {
             trigger(true, singingBowl, 2);
             trigger(false, singingBowl, time.minToSec(settings.warmUpLength) - 5)
+          }
+
+          if (settings.secondaryQueue === 'music') {
+            trigger(true, music, 2);
+            trigger(false, music, time.minToSec(settings.warmUpLength) - 5)
           }
           
           // warm up guides
@@ -229,10 +236,15 @@ export default function useMeditationRoutine(props: RoutineProps) {
         // stillness visualization
         if (settings.visualization !== null) {
 
-          // singing bowl triggers
+          // secondary queues triggers
           if (settings.secondaryQueue === 'singing-bowl') {
-            trigger(true, singingBowl, (visualizationTime - 10));
+            trigger(true, singingBowl, (visualizationTime - 20));
             trigger(false, singingBowl, (visualizationTime + 85));
+          }
+
+          if (settings.secondaryQueue === 'music') {
+            trigger(true, music, (visualizationTime - 20));
+            trigger(false, music, (visualizationTime + 80));
           }
 
           // stillness visualization triggers

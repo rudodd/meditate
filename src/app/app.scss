@@ -74,10 +74,10 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: translateY(1rem);
+      transform: translateY(-0.5rem);
 
       .content {
-        height: 475px;
+        height: 450px;
         width: 200px;
         display: flex;
         flex-direction: column;

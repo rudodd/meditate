@@ -14,6 +14,7 @@ export default function useSingingBowl() {
   }
 
   const stop = () => {
+    sound.fade(1,0,5000);
     setTimeout(() => {
       sound.stop();
     }, 5000)

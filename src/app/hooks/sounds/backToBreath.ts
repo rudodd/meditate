@@ -24,7 +24,7 @@ export default function useBackToBreath() {
     setSound(new Howl({
       src: '/sounds/back-to-breath.mp3',
       preload: true,
-      volume: 1,
+      volume: 0.6,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

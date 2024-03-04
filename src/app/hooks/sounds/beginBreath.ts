@@ -24,7 +24,7 @@ export default function useBeginBreath() {
     setSound(new Howl({
       src: '/sounds/begin-breath.mp3',
       preload: true,
-      volume: 0.9,
+      volume: 0.7,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

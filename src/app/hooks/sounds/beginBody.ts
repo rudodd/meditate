@@ -24,7 +24,7 @@ export default function useBeginBody() {
     setSound(new Howl({
       src: '/sounds/lets-begin.mp3',
       preload: true,
-      volume: 1,
+      volume: 0.7,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

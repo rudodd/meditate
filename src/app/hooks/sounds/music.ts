@@ -3,20 +3,21 @@ import { useState, useEffect } from 'react';
 // @ts-ignore
 import { Howl } from 'howler';
 
-export default function useStillnessTwo() {
+export default function useMusic() {
   const [sound, setSound] = useState<any>()
   const [loaded, setLoaded] = useState(false);
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
     sound.play();
+    sound.fade(0,1,2000);
   }
 
   const stop = () => {
-    sound.fade(1,0,5000);
+    sound.fade(1,0,10000);
     setTimeout(() => {
       sound.stop();
-    }, 5000)
+    }, 10000)
   }
 
   const pause = () => {
@@ -25,11 +26,11 @@ export default function useStillnessTwo() {
 
   useEffect(() => {
     setSound(new Howl({
-      src: '/sounds/your-mind-is-lake.mp3',
+      src: '/sounds/music.mp3',
       preload: true,
-      volume: 0.6,
+      volume: 1,
       autoplay: false,
-      rate: 1.05,
+      loop: true,
       onload: () => setLoaded(true),
       onplay: () => setPlaying(true),
       onstop: () => setPlaying(false),

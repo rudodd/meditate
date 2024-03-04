@@ -24,7 +24,7 @@ export default function useNoticeBreath() {
     setSound(new Howl({
       src: '/sounds/notice-where-your-breath.mp3',
       preload: true,
-      volume: 0.8,
+      volume: 0.65,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

@@ -24,7 +24,7 @@ export default function useGetComfortable() {
     setSound(new Howl({
       src: '/sounds/comfortable-position.mp3',
       preload: true,
-      volume: 0.9,
+      volume: 0.7,
       rate: 1.1,
       autoplay: false,
       onload: () => setLoaded(true),

@@ -24,7 +24,7 @@ export default function useAttentionToBreath() {
     setSound(new Howl({
       src: '/sounds/turn-attention-to-breath.mp3',
       preload: true,
-      volume: 0.7,
+      volume: 0.45,
       rate: 1.1,
       autoplay: false,
       onload: () => setLoaded(true),
