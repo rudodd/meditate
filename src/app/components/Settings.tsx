@@ -49,12 +49,9 @@ export default function Settings(props: SettingsProps) {
   }, []);
 
   useEffect(() => {
-    console.log('settingsState set');
     if (JSON.stringify(settingsState) !== JSON.stringify(settings)) {
-      console.log('save settings')
       save(settingsState);
     }
-    console.log(settingsState);
   }, [settingsState])
 
   return (

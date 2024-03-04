@@ -9,7 +9,6 @@ export default function useSettings(data: GoogleUser | null) {
 
   const fetchSettings = () => {
     if (data?.user?.email) {
-      console.log('get settings');
       axios.post('/api/user', {email: data?.user?.email})
         .then((res: AxiosResponse) => {
           setSettings(res?.data?.user?.settings);
