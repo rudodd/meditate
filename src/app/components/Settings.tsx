@@ -48,6 +48,15 @@ export default function Settings(props: SettingsProps) {
     setSettingsState(settings);
   }, []);
 
+  useEffect(() => {
+    console.log('settingsState set');
+    if (JSON.stringify(settingsState) !== JSON.stringify(settings)) {
+      console.log('save settings')
+      save(settingsState);
+    }
+    console.log(settingsState);
+  }, [settingsState])
+
   return (
     <Modal
         aria-labelledby="transition-modal-title"
@@ -185,9 +194,6 @@ export default function Settings(props: SettingsProps) {
                   </div>
                 }
               </div>
-            </div>
-            <div className="settings-footer">
-              <Button variant="contained" onClick={() => saveSettings()}>Update settings</Button>
             </div>
           </Container>
         </Fade>

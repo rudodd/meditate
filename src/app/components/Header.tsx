@@ -18,8 +18,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-export default function Header(props: GoogleUser) {
-  const { user } = props;
+export default function Header(props: {user: GoogleUser | null | undefined, setSettingsOpen: (state: boolean) => void }) {
+  const { user, setSettingsOpen } = props;
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>();
 
   const openMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -38,7 +38,7 @@ export default function Header(props: GoogleUser) {
           {user &&
             <>
               <IconButton onClick={openMenu} className="avatar">
-                <Avatar alt={user?.name ? user.name : ''} src={user?.image ? user?.image : ''} />
+                <Avatar alt={user?.user?.name ? user.user.name : ''} src={user?.user?.image ? user?.user?.image : ''} />
               </IconButton>
               <Menu
                 sx={{ mt: '45px' }}
@@ -56,7 +56,7 @@ export default function Header(props: GoogleUser) {
                 open={Boolean(anchorElUser)}
                 onClose={closeMenu}
               >
-                <MenuItem onClick={() =>console.log('open settings')}>
+                <MenuItem onClick={() => setSettingsOpen(true)}>
                   <ListItemIcon>
                     <SettingsIcon fontSize="small" />
                   </ListItemIcon>

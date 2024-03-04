@@ -88,7 +88,7 @@ export default function App() {
 
   return (
     <main>
-      <Header user={user?.user} />
+      <Header user={user} setSettingsOpen={setSettingsOpen} />
       {loading ? (
         <div className="loading-container blur">
           <LinearProgress variant="determinate" color="error" value={routine.loadingProgress} />
