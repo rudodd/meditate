@@ -1,13 +1,13 @@
 // import library functionality
 import { useEffect, useState } from 'react';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { signIn, getSession} from 'next-auth/react';
 import axios, { AxiosResponse } from 'axios';
 
 // import custom functionality
 import useTimer from '../hooks/timer';
 import useMeditationRoutine from '../hooks/meditationRoutine';
 import useSettings from '../hooks/useSettings';
-import { Timer, SessionStatus, RoutineSettings } from '../types';
+import { Timer, SessionStatus, RoutineSettings, GoogleUser } from '../types';
 
 // import components
 import Header from './Header';
@@ -23,14 +23,14 @@ import { IconButton } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 
 export default function App() {
-  const { data: user, status } = useSession();
   const [loading, setLoading] = useState<boolean>(true);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const timer: Timer = useTimer(isActive, isPaused);
-  const { id, settings, fetchSettings } = useSettings(user, status);
+  const [user, setUser] = useState<GoogleUser | null>(null);
+  const { id, settings, fetchSettings } = useSettings(user);
   const routine = useMeditationRoutine({settings, isActive, isPaused, timer});
 
   const playRoutine = () => {
@@ -82,6 +82,10 @@ export default function App() {
       setLoggedIn(true);
     }
   }, [user])
+
+  useEffect(() => {
+    getSession().then((res) => setUser(res));
+  }, [])
 
   return (
     <main>

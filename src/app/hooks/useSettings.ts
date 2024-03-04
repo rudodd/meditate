@@ -3,12 +3,12 @@ import axios, { AxiosResponse } from 'axios';
 import { RoutineSettings, SessionStatus } from '../types';
 import { GoogleUser } from '../types';
 
-export default function useSettings(data: GoogleUser | null, status: string) {
+export default function useSettings(data: GoogleUser | null) {
   const [id, setId] = useState<string | null>(null);
   const [settings, setSettings] = useState<RoutineSettings>();
 
   const fetchSettings = () => {
-    if (status === SessionStatus.LoggedIn && data?.user?.email) {
+    if (data?.user?.email) {
       console.log('get settings');
       axios.post('/api/user', {email: data?.user?.email})
         .then((res: AxiosResponse) => {
@@ -20,7 +20,7 @@ export default function useSettings(data: GoogleUser | null, status: string) {
 
   useEffect(() => {
     fetchSettings();
-  }, [data, status])
+  }, [data])
 
   const userInfo = {id, settings, fetchSettings};
   return userInfo;
