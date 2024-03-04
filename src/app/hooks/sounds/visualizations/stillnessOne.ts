@@ -27,7 +27,7 @@ export default function useStillnessOne() {
     setSound(new Howl({
       src: '/sounds/lake-visualization.mp3',
       preload: true,
-      volume: 0.9,
+      volume: 0.8,
       autoplay: false,
       onload: () => setLoaded(true),
       onplay: () => setPlaying(true),

@@ -24,7 +24,7 @@ export default function useMoodShort() {
     setSound(new Howl({
       src: '/sounds/mood-short.mp3',
       preload: true,
-      volume: 1,
+      volume: 0.9,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

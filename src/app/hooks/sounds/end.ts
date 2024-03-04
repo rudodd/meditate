@@ -24,7 +24,7 @@ export default function useEnd() {
     setSound(new Howl({
       src: '/sounds/open-your-eyes.mp3',
       preload: true,
-      volume: 1,
+      volume: 0.8,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

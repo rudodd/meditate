@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 // @ts-ignore
 import { Howler } from 'howler';
 
-import { RoutineSettings, AudioFile, Timer } from '../types';
+import { RoutineSettings, AudioFile } from '../types';
 import { time } from '../helpers';
 
 // import audio hooks
@@ -34,12 +34,11 @@ interface RoutineProps {
   settings: RoutineSettings | undefined;
   isActive: boolean;
   isPaused :boolean;
-  timer: Timer;
 }
 
 export default function useMeditationRoutine(props: RoutineProps) {
   Howler.volume(9);
-  const { settings, isActive, isPaused, timer } = props;
+  const { settings, isActive, isPaused } = props;
   const whiteNoise: AudioFile = useWhiteNoise();
   const warmUp: AudioFile = useWarmUp();
   const getComfortable: AudioFile = useGetComfortable();
@@ -65,6 +64,7 @@ export default function useMeditationRoutine(props: RoutineProps) {
   const stillnessTwo: AudioFile = useStillnessTwo();
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [playProgress, setPlayProgress] = useState(0);
+  const [timer, setTimer] = useState<number>(0);
   const soundDependencies = [
     whiteNoise,
     warmUp,
@@ -91,21 +91,40 @@ export default function useMeditationRoutine(props: RoutineProps) {
     stillnessTwo,
   ];
 
+  const timerReset = () => {
+    setTimer(0);
+  };
+
+  useEffect(() => {
+    let timerInterval: ReturnType<typeof setInterval> | undefined;
+    if (isActive && !isPaused) {
+      timerInterval = setInterval(() => {
+        setTimer((timer) => timer + 1);
+      }, time.seconds(1));
+    } else {
+      clearInterval(timerInterval);
+    }
+
+    return () => clearInterval(timerInterval);
+  }, [isActive, isPaused]);
+
   const trigger = (play: boolean, sound: AudioFile, time: number = 0, guideLevel: string[] = []) => {
-    if (timer.time === time) {
-      if (guideLevel.length) {
-        if (settings?.guided && guideLevel.includes(settings?.guided)) {
+    if (!sound.playing) {
+      if (timer === time) {
+        if (guideLevel.length) {
+          if (settings?.guided && guideLevel.includes(settings?.guided)) {
+            if (play) {
+              sound.play();
+            } else {
+              sound.stop();
+            }
+          }
+        } else {
           if (play) {
             sound.play();
           } else {
             sound.stop();
           }
-        }
-      } else {
-        if (play) {
-          sound.play();
-        } else {
-          sound.stop();
         }
       }
     }
@@ -140,7 +159,7 @@ export default function useMeditationRoutine(props: RoutineProps) {
       const finalChimeTime = settings.visualization !== null ? visualizationTime + time.minToSec(3) : beginTime + time.minToSec(settings.length) + 15;
       const windDownChimeTime = finalChimeTime - time.minToSec(1.5);
       const totalLength = finalChimeTime + 21;
-      setPlayProgress((timer.time / totalLength) * 100)
+      setPlayProgress((timer / totalLength) * 100)
   
       if (isActive && !isPaused) {
   
@@ -164,7 +183,7 @@ export default function useMeditationRoutine(props: RoutineProps) {
   
         // white noise triggers
         if (settings.whiteNoise === 'white-noise') {
-          trigger(true, whiteNoise, 0);
+          trigger(true, whiteNoise, 1);
           trigger(false, whiteNoise, finalChimeTime + 10);
         }
   
@@ -233,5 +252,5 @@ export default function useMeditationRoutine(props: RoutineProps) {
     // Howler.pause();
   }, [isPaused])
 
-  return {loadingProgress: loadingProgress, playProgress: playProgress, stop: stop}
+  return {loadingProgress, playProgress, stop, timer, timerReset}
 }

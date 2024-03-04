@@ -4,7 +4,6 @@ import { signIn, getSession} from 'next-auth/react';
 import axios, { AxiosResponse } from 'axios';
 
 // import custom functionality
-import useTimer from '../hooks/timer';
 import useMeditationRoutine from '../hooks/meditationRoutine';
 import useSettings from '../hooks/useSettings';
 import { Timer, SessionStatus, RoutineSettings, GoogleUser } from '../types';
@@ -28,10 +27,9 @@ export default function App() {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
-  const timer: Timer = useTimer(isActive, isPaused);
   const [user, setUser] = useState<GoogleUser | null>(null);
   const { id, settings, fetchSettings } = useSettings(user);
-  const routine = useMeditationRoutine({settings, isActive, isPaused, timer});
+  const routine = useMeditationRoutine({settings, isActive, isPaused });
 
   const playRoutine = () => {
     if (routine.loadingProgress === 100) {
@@ -47,7 +45,7 @@ export default function App() {
 
   const stopRoutine = () => {
     setIsActive(false);
-    timer.reset();
+    routine.timerReset();
     routine.stop();
   }
 
@@ -112,9 +110,9 @@ export default function App() {
           <Container className="content-container" maxWidth="xs">
             <div className="content">
               <div className="timer">
-                {~~(timer.time / 60) < 10 ? '0' + ~~(timer.time / 60) : ~~(timer.time / 60)}
+                {~~(routine.timer / 60) < 10 ? '0' + ~~(routine.timer / 60) : ~~(routine.timer / 60)}
                 :
-                {timer.time % 60 < 10 ? '0' + timer.time % 60 : timer.time % 60}
+                {routine.timer % 60 < 10 ? '0' + routine.timer % 60 : routine.timer % 60}
               </div>
               <div className="progress-bar">
                 <LinearProgress variant="determinate" value={routine.playProgress} className="progress-visual" />
