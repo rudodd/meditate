@@ -28,7 +28,7 @@ export default function useWhiteNoise() {
     setSound(new Howl({
       src: '/sounds/white-noise-long.mp3',
       preload: true,
-      volume: 1.25,
+      volume: 1,
       autoplay: false,
       html5: true,
       onload: () => setLoaded(true),

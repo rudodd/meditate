@@ -143,8 +143,7 @@ export default function Settings(props: SettingsProps) {
                         label="Warmup length"
                         onChange={(e) => updateSettings('warmUpLength', e.target.value)}
                       >
-                        <MenuItem value={0.5}>30 Seconds</MenuItem>
-                        <MenuItem value={1}>1 Minute</MenuItem>
+                        <MenuItem value={1}>1 Minutes</MenuItem>
                         <MenuItem value={1.5}>1 1/2 Minutes</MenuItem>
                         <MenuItem value={2}>2 Minutes</MenuItem>
                         <MenuItem value={2.5}>2 1/2 Minutes</MenuItem>

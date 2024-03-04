@@ -150,9 +150,9 @@ export default function useMeditationRoutine(props: RoutineProps) {
   useEffect(() => {
     if (settings) {
       const beginTime = settings.warmUp ? time.minToSec(settings.warmUpLength) : 5;
-      const bodyScanTime = beginTime + 25;
-      const mindfullnessTime = bodyScanTime + 70;
-      const halfWayTime = Math.round((time.minToSec(settings.length) - mindfullnessTime - time.minToSec(1.5)) / 2) + mindfullnessTime;
+      const bodyScanTime = beginTime + 35;
+      const mindfullnessTime = bodyScanTime + 80;
+      const halfWayTime = Math.round((time.minToSec(settings.length) - mindfullnessTime) / 2) + mindfullnessTime;
       const visualizationTime = beginTime + time.minToSec(settings.length);
       const finalChimeTime = settings.visualization !== null ? visualizationTime + time.minToSec(3) : beginTime + time.minToSec(settings.length) + 15;
       const windDownChimeTime = finalChimeTime - time.minToSec(1.5);
@@ -196,9 +196,9 @@ export default function useMeditationRoutine(props: RoutineProps) {
           
           // warm up guides
           if (beginTime > 30) { trigger(true, warmUp, 5, ['full']) };
-          trigger(true, getComfortable, (beginTime - 15), ['full', 'semi']);
+          trigger(true, getComfortable, (beginTime - 20), ['full', 'semi']);
           trigger(true, breathAttention, (beginTime - 10), ['full']);
-          trigger(true, lastBreath, (beginTime + 14), ['full']);
+          trigger(true, lastBreath, (beginTime + 17), ['full']);
         }
   
         // body / mood scan triggers

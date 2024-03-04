@@ -18,8 +18,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-export default function Header(props: {user: GoogleUser | null | undefined, setSettingsOpen: (state: boolean) => void }) {
-  const { user, setSettingsOpen } = props;
+export default function Header(props: {user: GoogleUser | null | undefined, setSettingsOpen: (state: boolean) => void, isActive: boolean }) {
+  const { user, setSettingsOpen, isActive } = props;
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>();
 
   const openMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -56,7 +56,7 @@ export default function Header(props: {user: GoogleUser | null | undefined, setS
                 open={Boolean(anchorElUser)}
                 onClose={closeMenu}
               >
-                <MenuItem onClick={() => setSettingsOpen(true)}>
+                <MenuItem onClick={() => setSettingsOpen(true)} disabled={isActive}>
                   <ListItemIcon>
                     <SettingsIcon fontSize="small" />
                   </ListItemIcon>

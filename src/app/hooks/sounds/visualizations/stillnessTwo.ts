@@ -29,7 +29,7 @@ export default function useStillnessTwo() {
       preload: true,
       volume: 0.8,
       autoplay: false,
-      rate: 1.1,
+      rate: 1.05,
       onload: () => setLoaded(true),
       onplay: () => setPlaying(true),
       onstop: () => setPlaying(false),

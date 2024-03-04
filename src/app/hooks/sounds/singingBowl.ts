@@ -10,10 +10,10 @@ export default function useSingingBowl() {
 
   const play = () => {
     sound.play();
+    sound.fade(0,1,2000);
   }
 
   const stop = () => {
-    sound.fade(1,0,5000);
     setTimeout(() => {
       sound.stop();
     }, 5000)
@@ -29,6 +29,7 @@ export default function useSingingBowl() {
       preload: true,
       volume: 1,
       autoplay: false,
+      loop: true,
       onload: () => setLoaded(true),
       onplay: () => setPlaying(true),
       onstop: () => setPlaying(false),

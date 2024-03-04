@@ -23,7 +23,7 @@ export interface GoogleUser {
 
 export interface RoutineSettings {
   warmUp: boolean;
-  warmUpLength: 0.5 | 1 | 1.5 | 2 | 2.5 | 3;
+  warmUpLength: 1 | 1.5 | 2 | 2.5 | 3;
   whiteNoise: null | 'white-noise';
   length: 5 | 7 | 10 | 15 | 30;
   guided: null | 'semi' | 'full';
