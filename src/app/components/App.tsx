@@ -77,7 +77,6 @@ export default function App() {
   }, [routine]);
 
   useEffect(() => {
-    console.log(status, user);
     if (user?.user?.email) {
       setLoggedIn(true);
     }
@@ -110,7 +109,7 @@ export default function App() {
         </Container>
       ) : (
         <>
-          <Container className="content-container">
+          <Container className="content-container" maxWidth="xs">
             <div className="content">
               <div className="timer">
                 {~~(timer.time / 60) < 10 ? '0' + ~~(timer.time / 60) : ~~(timer.time / 60)}
@@ -134,9 +133,9 @@ export default function App() {
             </div>
           </Container>
           <Footer isActive={isActive} isPaused={isPaused} play={playRoutine} stop={stopRoutine} pause={toggleRoutinePause} />
+          <Settings open={settingsOpen} settings={settings} close={() => setSettingsOpen(false)} save={saveSettings} />
         </>
       )}
-      <Settings open={settingsOpen} settings={settings} close={() => setSettingsOpen(false)} save={saveSettings} />
     </main>
   )
 }

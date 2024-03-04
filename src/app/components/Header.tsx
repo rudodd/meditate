@@ -32,7 +32,7 @@ export default function Header(props: GoogleUser) {
 
   return (
     <AppBar position="fixed" className="app-bar">
-      <Container className="app-bar-content">
+      <Container className="app-bar-content" maxWidth="xs">
         <h1>Meditate</h1>
         <div className="app-bar-avatar">
           {user &&
