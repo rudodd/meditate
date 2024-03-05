@@ -9,6 +9,7 @@ export default function useEnd() {
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
+    sound.volume(0.6);
     sound.play();
   }
 
@@ -24,7 +25,7 @@ export default function useEnd() {
     setSound(new Howl({
       src: '/sounds/open-your-eyes.mp3',
       preload: true,
-      volume: 0.7,
+      volume: 0.6,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

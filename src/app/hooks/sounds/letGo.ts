@@ -9,6 +9,7 @@ export default function useLetGo() {
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
+    sound.volume(0.7);
     sound.play();
   }
 

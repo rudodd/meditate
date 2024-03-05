@@ -250,8 +250,8 @@ export default function useMeditationRoutine(props: RoutineProps) {
           // stillness visualization triggers
           if (settings.visualization === 'stillness') {
             trigger(true, stillnessOne, visualizationTime);
-            trigger(true, chime, (visualizationTime + 32));
-            trigger(true, stillnessTwo, (visualizationTime + 50));
+            trigger(true, chime, (visualizationTime + 35));
+            trigger(true, stillnessTwo, (visualizationTime + 55));
           }
         }
       }

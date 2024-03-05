@@ -9,6 +9,7 @@ export default function useMantra() {
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
+    sound.volume(0.5);
     sound.play();
   }
 
@@ -24,7 +25,7 @@ export default function useMantra() {
     setSound(new Howl({
       src: '/sounds/earth-trust.mp3',
       preload: true,
-      volume: 0.6,
+      volume: 0.5,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

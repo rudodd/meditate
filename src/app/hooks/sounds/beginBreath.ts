@@ -9,6 +9,7 @@ export default function useBeginBreath() {
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
+    sound.volume(0.45);
     sound.play();
   }
 
@@ -24,7 +25,7 @@ export default function useBeginBreath() {
     setSound(new Howl({
       src: '/sounds/begin-breath.mp3',
       preload: true,
-      volume: 0.7,
+      volume: 0.45,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

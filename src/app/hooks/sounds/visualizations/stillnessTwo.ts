@@ -9,14 +9,12 @@ export default function useStillnessTwo() {
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
+    sound.volume(0.55)
     sound.play();
   }
 
   const stop = () => {
-    sound.fade(1,0,5000);
-    setTimeout(() => {
-      sound.stop();
-    }, 5000)
+    sound.stop();
   }
 
   const pause = () => {
@@ -27,7 +25,7 @@ export default function useStillnessTwo() {
     setSound(new Howl({
       src: '/sounds/your-mind-is-lake.mp3',
       preload: true,
-      volume: 0.6,
+      volume: 0.55,
       autoplay: false,
       rate: 1.05,
       onload: () => setLoaded(true),

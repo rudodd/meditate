@@ -9,6 +9,7 @@ export default function useWarmUp() {
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
+    sound.volume(0.7);
     sound.play();
   }
 
@@ -24,7 +25,7 @@ export default function useWarmUp() {
     setSound(new Howl({
       src: '/sounds/stretch-intro.mp3',
       preload: true,
-      volume: 0.85,
+      volume: 1,
       rate: 1.1,
       autoplay: false,
       onload: () => setLoaded(true),

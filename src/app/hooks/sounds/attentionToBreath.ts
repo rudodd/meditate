@@ -9,6 +9,7 @@ export default function useAttentionToBreath() {
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
+    sound.volume(0.55);
     sound.play();
   }
 
@@ -24,7 +25,7 @@ export default function useAttentionToBreath() {
     setSound(new Howl({
       src: '/sounds/turn-attention-to-breath.mp3',
       preload: true,
-      volume: 0.45,
+      volume: 0.55,
       rate: 1.1,
       autoplay: false,
       onload: () => setLoaded(true),

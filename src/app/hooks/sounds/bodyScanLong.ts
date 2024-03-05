@@ -9,6 +9,7 @@ export default function useBodyScanLong() {
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
+    sound.volume(0.6);
     sound.play();
   }
 
@@ -24,7 +25,7 @@ export default function useBodyScanLong() {
     setSound(new Howl({
       src: '/sounds/body-scan-long.mp3',
       preload: true,
-      volume: 0.7,
+      volume: 0.6,
       autoplay: false,
       rate: 1.1,
       onload: () => setLoaded(true),

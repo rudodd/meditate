@@ -9,6 +9,7 @@ export default function useLastBreath() {
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
+    sound.volume(0.35);
     sound.play();
   }
 
@@ -24,7 +25,7 @@ export default function useLastBreath() {
     setSound(new Howl({
       src: '/sounds/last-deep-breath.mp3',
       preload: true,
-      volume: 0.55,
+      volume: 0.35,
       rate: 1.1,
       autoplay: false,
       onload: () => setLoaded(true),
