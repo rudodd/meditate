@@ -30,6 +30,7 @@ export default function useWhiteNoise() {
       preload: true,
       volume: 1,
       autoplay: false,
+      html5: true,
       onload: () => setLoaded(true),
       onplay: () => setPlaying(true),
       onstop: () => setPlaying(false),
