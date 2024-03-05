@@ -1,13 +1,12 @@
 // import library functionality
 import { useState } from 'react';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 
 // import types
 import { GoogleUser } from '../types';
 
 // import components
-import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
@@ -31,7 +30,7 @@ export default function Header(props: {user: GoogleUser | null | undefined, setS
   };
 
   return (
-    <AppBar position="fixed" className="app-bar">
+    <div className="app-bar">
       <Container className="app-bar-content" maxWidth="xs">
         <h1>Meditate</h1>
         <div className="app-bar-avatar">
@@ -73,6 +72,6 @@ export default function Header(props: {user: GoogleUser | null | undefined, setS
           }
         </div>
       </Container>
-    </AppBar>
+    </div>
   )
 }

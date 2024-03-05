@@ -89,7 +89,9 @@ export default function App() {
       <Header user={user} setSettingsOpen={setSettingsOpen} isActive={isActive} />
       {loading ? (
         <div className="loading-container blur">
-          <LinearProgress variant="determinate" color="error" value={routine.loadingProgress} />
+          <div className="loading-progress-container">
+            <LinearProgress variant="determinate" color="error" value={routine.loadingProgress} />
+          </div>
           <div className="circle-container">
             <CircularProgress className="circle" />
           </div>
