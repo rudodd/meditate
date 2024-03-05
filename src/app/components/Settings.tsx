@@ -61,6 +61,7 @@ export default function Settings(props: SettingsProps) {
         open={open}
         onClose={close}
         closeAfterTransition
+        className="settings-modal"
       >
         <Fade in={open}>
           <Container className="settings-container" maxWidth="xs">
