@@ -210,10 +210,10 @@ export default function useMeditationRoutine(props: RoutineProps) {
   
         // body / mood scan triggers
         trigger(true, beginBody, bodyScanTime, ['full', 'semi']);
-        trigger(true, bodyScanLong, (bodyScanTime + 20), ['full']);
-        trigger(true, bodyScanShort, (bodyScanTime + 20), ['semi']);
-        trigger(true, moodLong, (bodyScanTime + 40), ['full']);
-        trigger(true, moodShort, (bodyScanTime + 40), ['semi']);
+        trigger(true, bodyScanLong, (bodyScanTime + 18), ['full']);
+        trigger(true, bodyScanShort, (bodyScanTime + 18), ['semi']);
+        trigger(true, moodLong, (bodyScanTime + 45), ['full']);
+        trigger(true, moodShort, (bodyScanTime + 45), ['semi']);
   
         // breath triggers
         trigger(true, beginBreath, mindfullnessTime, ['full', 'semi']);

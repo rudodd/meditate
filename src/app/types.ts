@@ -28,7 +28,7 @@ export interface RoutineSettings {
   length: 5 | 7 | 10 | 15 | 30;
   guided: null | 'semi' | 'full';
   secondaryQueue: null | 'music' | 'singing-bowl';
-  visualization: null | 'stillness' | 'loving-kindness';
+  visualization: null | 'self-guided' | 'stillness' | 'loving-kindness';
 }
 
 export enum SessionStatus {

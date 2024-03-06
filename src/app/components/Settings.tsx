@@ -185,7 +185,8 @@ export default function Settings(props: SettingsProps) {
                         onChange={(e) => updateSettings('visualization', e.target.value)}
                       >
                         <MenuItem value="stillness">Stillness</MenuItem>
-                        <MenuItem value="loving-kindness">Loving Kindness</MenuItem>
+                        {/* <MenuItem value="loving-kindness">Loving Kindness</MenuItem> */}
+                        <MenuItem value="self-guided">Self-guided</MenuItem>
                       </Select>
                     </FormControl>
                   </div>
