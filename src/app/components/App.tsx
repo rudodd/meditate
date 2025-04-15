@@ -1,12 +1,14 @@
 // import library functionality
 import { useEffect, useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 // import custom functionality
-import useMeditationRoutine from '../hooks/meditationRoutine';
+import useMeditationRoutine from '../hooks/useMeditationRoutine';
 import useSettings from '../hooks/useSettings';
-import { Timer, SessionStatus, RoutineSettings, GoogleUser } from '../types';
+
+// import types
+import { SessionStatus, RoutineSettings, GoogleUser } from '../types';
 
 // import components
 import Header from './Header';
@@ -22,13 +24,13 @@ import { IconButton } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 
 export default function App() {
+  const { data: session, status } = useSession();
   const [loading, setLoading] = useState<boolean>(true);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [user, setUser] = useState<GoogleUser | null>(null);
-  const { data: session, status } = useSession();
   const { id, settings, fetchSettings } = useSettings(user);
   const routine = useMeditationRoutine({settings, isActive, isPaused });
 
@@ -50,14 +52,11 @@ export default function App() {
   }
 
   const saveSettings = (newSettings: RoutineSettings) => {
-    const userObj = {
-      email: user?.user?.email,
-      settings: newSettings
-    }
+    const userObj = { email: user?.user?.email, settings: newSettings };
     axios.put('/api/user', { id: id, user: userObj })
-    .then((res: AxiosResponse) => {
-      fetchSettings();
-    })
+      .then(() => {
+        fetchSettings();
+      })
   }
 
   useEffect(() => {
@@ -85,6 +84,10 @@ export default function App() {
       setUser(session)
     }
   }, [session])
+
+  useEffect(() => {
+    console.log(status)
+  }, [status])
 
   return (
     <main>

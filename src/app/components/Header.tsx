@@ -1,7 +1,6 @@
 // import library functionality
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { signOut } from 'next-auth/react';
-
 
 // import types
 import { GoogleUser } from '../types';
@@ -17,17 +16,18 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-export default function Header(props: {user: GoogleUser | null | undefined, setSettingsOpen: (state: boolean) => void, isActive: boolean }) {
+// component type
+interface ComponentProps {
+  user: GoogleUser | null | undefined;
+  setSettingsOpen: (state: boolean) => void;
+  isActive: boolean;
+}
+
+export default function Header(props: ComponentProps) {
   const { user, setSettingsOpen, isActive } = props;
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>();
-
-  const openMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const closeMenu = () => {
-    setAnchorElUser(null);
-  };
+  const openMenu = useCallback((event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget), []);
+  const closeMenu = useCallback(() => setAnchorElUser(null), []);
 
   return (
     <div className="app-bar">

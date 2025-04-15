@@ -1,6 +1,3 @@
-// import library functionality
-import { styled } from '@mui/material/styles';
-
 // import components
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,7 +6,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import StopIcon from '@mui/icons-material/Stop';
 import PauseIcon from '@mui/icons-material/Pause';
 
-interface FooterProps {
+interface ComponentProps {
   isActive: boolean;
   isPaused: boolean;
   play: () => void;
@@ -17,7 +14,7 @@ interface FooterProps {
   pause: () => void;
 }
 
-export default function Footer(props: FooterProps) {
+export default function Footer(props: ComponentProps) {
   const { isActive, isPaused, play, stop, pause } = props;
 
   return (
@@ -27,29 +24,27 @@ export default function Footer(props: FooterProps) {
       sx={{ top: 'auto', bottom: 0 }} 
       className="footer-bar"
     >
-    <Toolbar>
-      <div className="controller-contianer">
-        {isActive ? (
-            <>
-              {isPaused ? (
-                <Fab color="secondary" aria-label="add" className="state-button play">
-                  <PlayArrowIcon onClick={() => play()} />
-                </Fab>
-              ) : (
-                <Fab color="secondary" aria-label="add" className="state-button pause">
-                  <PauseIcon onClick={() => pause()} />
-                </Fab>
-              )}
-              <Fab color="secondary" aria-label="add" className="state-button stop">
-                <StopIcon onClick={() => stop()} />
+    <Toolbar className="controller-contianer">
+      {isActive ? (
+          <>
+            {isPaused ? (
+              <Fab aria-label="play" className="state-button play">
+                <PlayArrowIcon onClick={() => play()} />
               </Fab>
-            </>
-          ) : (
-            <Fab color="secondary" aria-label="add" className="state-button play">
-              <PlayArrowIcon onClick={() => play()} />
+            ) : (
+              <Fab aria-label="pause" className="state-button pause">
+                <PauseIcon onClick={() => pause()} />
+              </Fab>
+            )}
+            <Fab aria-label="stop" className="state-button stop">
+              <StopIcon onClick={() => stop()} />
             </Fab>
-          )}
-      </div>
+          </>
+        ) : (
+          <Fab aria-label="play" className="state-button play">
+            <PlayArrowIcon onClick={() => play()} />
+          </Fab>
+        )}
     </Toolbar>
   </AppBar>
   )

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { RoutineSettings, SessionStatus } from '../types';
+import { RoutineSettings } from '../types';
 import { GoogleUser } from '../types';
 
 export default function useSettings(data: GoogleUser | null) {

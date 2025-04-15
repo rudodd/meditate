@@ -1,6 +1,10 @@
 // import library functionality
 import React, { useState, useEffect } from 'react';
 
+// import custom functionality
+import { empty } from '../helpers';
+
+// import compoents
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Switch from '@mui/material/Switch';
@@ -9,35 +13,33 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
+// import types
 import { RoutineSettings } from '../types';
 
-interface SettingsProps {
+// component type
+interface ComponentProps {
   open: boolean;
   settings: RoutineSettings | undefined;
   close: () => void;
   save: (settings: RoutineSettings) => void;
 }
 
-export default function Settings(props: SettingsProps) {
+export default function Settings(props: ComponentProps) {
   const { open, settings, close, save } = props;
-  const [settingsState, setSettingsState] = useState<any>(settings);
+  const [settingsState, setSettingsState] = useState<RoutineSettings | undefined>(settings);
 
   const updateSettings = (name: string, value: null | number | string | boolean) => {
-    const updatedSettings = {
-      ...settingsState,
-      [name]: value
+    if (settingsState) {
+      const updatedSettings: RoutineSettings = {
+        ...settingsState,
+        [name]: value
+      }
+      setSettingsState(updatedSettings);
     }
-    setSettingsState(updatedSettings);
-  }
-
-  const saveSettings = () => {
-    save(settingsState);
-    close();
   }
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export default function Settings(props: SettingsProps) {
   }, []);
 
   useEffect(() => {
-    if (JSON.stringify(settingsState) !== JSON.stringify(settings)) {
+    if (settingsState && JSON.stringify(settingsState) !== JSON.stringify(settings)) {
       save(settingsState);
     }
   }, [settingsState])
@@ -67,13 +69,13 @@ export default function Settings(props: SettingsProps) {
           <Container className="settings-container" maxWidth="xs">
             <div className="settings-header">
               <h3>Settings</h3>
-              <IconButton 
-                  className="settings-close" 
-                  size="large"
-                  onClick={() => close()}
-                >
-                  <CloseIcon />
-                </IconButton>
+              <IconButton
+                className="settings-close"
+                size="large"
+                onClick={() => close()}
+              >
+                <CloseIcon />
+              </IconButton>
             </div>
             <div className="settings-form">
               <div className="settings-input-group">
@@ -81,13 +83,13 @@ export default function Settings(props: SettingsProps) {
                 <div className="settings-input">
                   <FormControlLabel 
                     label="White noise"
-                    control={<Switch checked={settingsState?.whiteNoise?.length > 0} onChange={(e) => updateSettings('whiteNoise', e.target.checked ? 'white-noise' : null)} />} 
+                    control={<Switch checked={!empty(settingsState?.whiteNoise)} onChange={(e) => updateSettings('whiteNoise', e.target.checked ? 'white-noise' : null)} />} 
                   />
                 </div>
                 <div className="settings-input">
                   <FormControlLabel 
                     label="Secondary audio queues"
-                    control={<Switch checked={settingsState?.secondaryQueue?.length > 0} onChange={(e) => updateSettings('secondaryQueue', e.target.checked ? 'singing-bowl' : null)} />} 
+                    control={<Switch checked={!empty(settingsState?.secondaryQueue)} onChange={(e) => updateSettings('secondaryQueue', e.target.checked ? 'singing-bowl' : null)} />} 
                   />
                 </div>
                 {settingsState?.secondaryQueue?.length && 
@@ -108,7 +110,7 @@ export default function Settings(props: SettingsProps) {
                 <div className="settings-input">
                   <FormControlLabel 
                     label="Guided"
-                    control={<Switch checked={settingsState?.guided?.length > 0} onChange={(e) => updateSettings('guided', e.target.checked ? 'full' : null)} />} 
+                    control={<Switch checked={!empty(settingsState?.guided)} onChange={(e) => updateSettings('guided', e.target.checked ? 'full' : null)} />} 
                   />
                 </div>
                 {settingsState?.guided?.length && 
@@ -132,7 +134,7 @@ export default function Settings(props: SettingsProps) {
                 <div className="settings-input">
                   <FormControlLabel 
                     label="Inlcude warmup"
-                    control={<Switch checked={settingsState?.warmUp} onChange={() => updateSettings('warmUp', !settingsState.warmUp)} />} 
+                    control={<Switch checked={settingsState?.warmUp} onChange={() => updateSettings('warmUp', settingsState?.warmUp ? false : true)} />} 
                   />
                 </div>
                 {settingsState?.warmUp && 
@@ -172,7 +174,7 @@ export default function Settings(props: SettingsProps) {
                 <div className="settings-input">
                   <FormControlLabel 
                     label="Inlcude visualization"
-                    control={<Switch checked={settingsState?.visualization?.length > 0} onChange={(e) => updateSettings('visualization', e.target.checked ? 'stillness' : null)} />} 
+                    control={<Switch checked={!empty(settingsState?.visualization)} onChange={(e) => updateSettings('visualization', e.target.checked ? 'stillness' : null)} />} 
                   />
                 </div>
                 {settingsState?.visualization?.length && 
