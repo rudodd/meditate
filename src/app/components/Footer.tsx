@@ -1,5 +1,4 @@
 // import library functionality
-import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 
 // import components
@@ -21,15 +20,6 @@ interface FooterProps {
 export default function Footer(props: FooterProps) {
   const { isActive, isPaused, play, stop, pause } = props;
 
-  const StyledFab = styled(Fab)({
-    position: 'absolute',
-    zIndex: 1,
-    top: -30,
-    left: 0,
-    right: 0,
-    margin: '0 auto',
-  });
-
   return (
     <AppBar 
       position="fixed" 
@@ -38,18 +28,28 @@ export default function Footer(props: FooterProps) {
       className="footer-bar"
     >
     <Toolbar>
-      <StyledFab 
-        color="secondary" 
-        aria-label="add" 
-        className={`state-button ${isActive ? 'stop' : 'play'}`}
-      >
+      <div className="controller-contianer">
         {isActive ? (
-          // <PauseIcon onClick={() => pause()} />
-          <StopIcon onClick={() => stop()} />
-        ) : (
-          <PlayArrowIcon onClick={() => play()} />
-        )}
-      </StyledFab>
+            <>
+              {isPaused ? (
+                <Fab color="secondary" aria-label="add" className="state-button play">
+                  <PlayArrowIcon onClick={() => play()} />
+                </Fab>
+              ) : (
+                <Fab color="secondary" aria-label="add" className="state-button pause">
+                  <PauseIcon onClick={() => pause()} />
+                </Fab>
+              )}
+              <Fab color="secondary" aria-label="add" className="state-button stop">
+                <StopIcon onClick={() => stop()} />
+              </Fab>
+            </>
+          ) : (
+            <Fab color="secondary" aria-label="add" className="state-button play">
+              <PlayArrowIcon onClick={() => play()} />
+            </Fab>
+          )}
+      </div>
     </Toolbar>
   </AppBar>
   )

@@ -1,6 +1,7 @@
 export interface AudioFile {
   loaded: boolean;
   playing: boolean;
+  paused: boolean;
   play: () => void;
   stop: () => void;
   pause: () => void;

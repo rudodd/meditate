@@ -129,18 +129,27 @@ body {
     .footer-bar {
       background: $dark-grey;
 
-      .state-button {
+      .controller-contianer {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin: auto;
+        transform: translateY(-50%);
 
-        &.play {
-          background: $blue;
-        }
+        .state-button {
+          position: unset;
 
-        &.pause {
-          background: $orange;
-        }
-
-        &.stop {
-          background: $red;
+          &.play {
+            background: $blue;
+          }
+  
+          &.pause {
+            background: $orange;
+          }
+  
+          &.stop {
+            background: $red;
+          }
         }
       }
     }

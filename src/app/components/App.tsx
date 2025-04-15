@@ -34,6 +34,9 @@ export default function App() {
 
   const playRoutine = () => {
     setIsActive(true);
+    if (isPaused) {
+      setIsPaused(false);
+    }
   }
 
   const toggleRoutinePause = () => {

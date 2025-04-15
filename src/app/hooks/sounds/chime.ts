@@ -7,6 +7,7 @@ export default function useChime() {
   const [sound, setSound] = useState<any>()
   const [loaded, setLoaded] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   const play = () => {
     sound.play();
@@ -27,10 +28,11 @@ export default function useChime() {
       volume: 0.65,
       autoplay: false,
       onload: () => setLoaded(true),
-      onplay: () => setPlaying(true),
+      onplay: () => {setPlaying(true), setPaused(false)},
       onstop: () => setPlaying(false),
+      onpause: () => setPaused(true)
     }))
   }, [])
 
-  return {loaded: loaded, playing: playing, play: play, stop: stop, pause: pause, audio: sound}
+  return { loaded, playing, paused, play, stop, pause, audio: sound }
 }
