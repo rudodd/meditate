@@ -1,6 +1,6 @@
 // import library functionality
 import { useEffect, useState } from 'react';
-import { signIn, getSession} from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import axios, { AxiosResponse } from 'axios';
 
 // import custom functionality
@@ -28,15 +28,12 @@ export default function App() {
   const [isPaused, setIsPaused] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [user, setUser] = useState<GoogleUser | null>(null);
+  const { data: session, status } = useSession();
   const { id, settings, fetchSettings } = useSettings(user);
   const routine = useMeditationRoutine({settings, isActive, isPaused });
 
   const playRoutine = () => {
-    if (routine.loadingProgress === 100) {
-      setIsActive(true);
-    } else {
-      setIsActive(true);
-    }
+    setIsActive(true);
   }
 
   const toggleRoutinePause = () => {
@@ -72,7 +69,7 @@ export default function App() {
     }
 
     return () => clearTimeout(loadingTimeout);
-  }, [routine]);
+  }, [routine, session]);
 
   useEffect(() => {
     if (user?.user?.email) {
@@ -81,8 +78,10 @@ export default function App() {
   }, [user])
 
   useEffect(() => {
-    getSession().then((res) => setUser(res));
-  }, [])
+    if (session?.user) {
+      setUser(session)
+    }
+  }, [session])
 
   return (
     <main>

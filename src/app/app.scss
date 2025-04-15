@@ -13,7 +13,8 @@ $dark-grey: #323232;
 
 html,
 body {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background: url('/img/endless-knot.jpg') center center no-repeat;
 
   main {
@@ -28,7 +29,7 @@ body {
       top: 0;
       background: $dark-grey;
       height: 3.5rem;
-      width: 100%;
+      width: calc(100vw + 1px);
       color: white;
       z-index: 998;
 
@@ -43,12 +44,13 @@ body {
           font-size: 2rem;
           font-weight: 400;
           font-style: normal;
-          margin: 1.5rem 0 0;
+          margin: 1.5rem 0 0 1rem;
           line-height: 1;
         }
         
         .app-bar-avatar {
           margin-left: auto;
+          margin-right: 0.5rem;
         }
       }
     }
