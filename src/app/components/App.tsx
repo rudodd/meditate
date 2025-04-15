@@ -132,7 +132,9 @@ export default function App() {
               </div>
             </div>
           </Container>
-          <Footer isActive={isActive} isPaused={isPaused} play={playRoutine} stop={stopRoutine} pause={toggleRoutinePause} />
+          {!settingsOpen &&
+            <Footer isActive={isActive} isPaused={isPaused} play={playRoutine} stop={stopRoutine} pause={toggleRoutinePause} />
+          }
           <Settings open={settingsOpen} settings={settings} close={() => setSettingsOpen(false)} save={saveSettings} />
         </>
       )}
