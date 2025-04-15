@@ -5,9 +5,9 @@ import { Howl } from 'howler';
 
 export default function useGetComfortable() {
   const [sound, setSound] = useState<any>()
-  const [loaded, setLoaded] = useState(false);
-  const [playing, setPlaying] = useState(false);
-  const [paused, setPaused] = useState(false);
+  const [loaded, setLoaded] = useState<boolean>(false);
+  const [playing, setPlaying] = useState<boolean>(false);
+  const [paused, setPaused] = useState<boolean>(false);
 
   const play = () => {
     sound.volume(0.7);

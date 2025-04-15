@@ -24,8 +24,8 @@ import TuneIcon from '@mui/icons-material/Tune';
 export default function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  const [isActive, setIsActive] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [user, setUser] = useState<GoogleUser | null>(null);
   const { data: session, status } = useSession();
