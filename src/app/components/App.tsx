@@ -74,20 +74,11 @@ export default function App() {
   }, [routine, session]);
 
   useEffect(() => {
-    if (user?.user?.email) {
+    if (session?.user?.email) {
+      setUser(session);
       setLoggedIn(true);
     }
-  }, [user])
-
-  useEffect(() => {
-    if (session?.user) {
-      setUser(session)
-    }
-  }, [session])
-
-  useEffect(() => {
-    console.log(status)
-  }, [status])
+  }, [session, user])
 
   return (
     <main>
