@@ -18,12 +18,7 @@ export default function Footer(props: ComponentProps) {
   const { isActive, isPaused, play, stop, pause } = props;
 
   return (
-    <AppBar 
-      position="fixed" 
-      color="primary" 
-      sx={{ top: 'auto', bottom: 0 }} 
-      className="footer-bar"
-    >
+    <div className="footer-bar">
     <Toolbar className="controller-contianer">
       {isActive ? (
           <>
@@ -46,6 +41,6 @@ export default function Footer(props: ComponentProps) {
           </Fab>
         )}
     </Toolbar>
-  </AppBar>
+  </div>
   )
 }
