@@ -80,11 +80,11 @@ body {
 
     .content-container {
       height: auto;
-      min-height: 100vh;
+      min-height: calc(100vh - 7rem);
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: translateY(0.5rem);
+      transform: translateY(3.5rem);
 
       .content {
         height: 450px;
