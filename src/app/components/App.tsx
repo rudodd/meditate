@@ -1,6 +1,6 @@
 // import library functionality
 import { useEffect, useState } from 'react';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn, useSession, getSession } from 'next-auth/react';
 import axios from 'axios';
 
 // import custom functionality
@@ -24,7 +24,6 @@ import { IconButton } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 
 export default function App() {
-  const { data: session, status } = useSession();
   const [loading, setLoading] = useState<boolean>(true);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -61,7 +60,7 @@ export default function App() {
 
   useEffect(() => {
     let loadingTimeout: ReturnType<typeof setTimeout>;
-    if (routine.loadingProgress === 100 && status !== SessionStatus.Loading) {
+    if (routine.loadingProgress === 100) {
       loadingTimeout = setTimeout(() => {
         setLoading(false);
       }, 500)
@@ -71,14 +70,17 @@ export default function App() {
     }
 
     return () => clearTimeout(loadingTimeout);
-  }, [routine, session]);
+  }, [routine]);
 
   useEffect(() => {
-    if (session?.user?.email) {
-      setUser(session);
+    if (user?.user?.email) {
       setLoggedIn(true);
     }
-  }, [session, user])
+  }, [user])
+
+  useEffect(() => {
+    getSession().then((res) => setUser(res));
+  }, [])
 
   return (
     <main>
