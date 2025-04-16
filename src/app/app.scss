@@ -17,11 +17,12 @@ body {
   background: url('/img/endless-knot.jpg') center center no-repeat;
   margin: 0;
   padding: 0;
+  height: 100%;
 
   main {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
 
     .blur {
       background: rgba(255,255,255, 0.85);
