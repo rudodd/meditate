@@ -172,6 +172,7 @@ body {
       .settings-header {
         position: fixed;
         top: 0;
+        left: 0;
         background: $dark-grey;
         width: 100%;
         padding: 1rem 0;
@@ -186,7 +187,7 @@ body {
           color: white;
           position: absolute;
           top: 0.25rem;
-          right: 1rem;
+          right: 0;
         }
       }
   
