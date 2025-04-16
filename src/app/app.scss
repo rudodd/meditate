@@ -13,9 +13,10 @@ $dark-grey: #323232;
 
 html,
 body {
-  height: 100vh;
   overflow: hidden;
   background: url('/img/endless-knot.jpg') center center no-repeat;
+  margin: 0;
+  padding: 0;
 
   main {
     display: flex;
@@ -58,13 +59,13 @@ body {
 
     .loading-container {
       height: auto;
-      min-height: 100vh;
       position: relative;
+      flex-grow: 1;
 
       .loading-progress-container {
         position: absolute;
         width: 100%;
-        top: 3.5rem;
+        top: 0;
       }
 
       .circle-container {
@@ -85,7 +86,6 @@ body {
       align-items: center;
       justify-content: center;
       flex-grow: 1;
-      border: solid 1px red;
 
       .content {
         height: 450px;
